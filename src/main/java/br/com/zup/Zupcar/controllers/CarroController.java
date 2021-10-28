@@ -43,8 +43,8 @@ public class CarroController {
         CarroDTO carroDTO =  new CarroDTO();
         carroDTO.setModelo(nomeDoCarro);
         carroDTO.setCor(cor);
-        carroDTO.getAno(ano);
-        carroDTO.getMotor(motor);
+        carroDTO.setAno(ano);
+        carroDTO.setMotor(motor);
 
         return carroDTO;
     }
