@@ -49,4 +49,15 @@ public class CarroController {
         return carroDTO;
     }
 
+    @DeleteMapping ("/{nomeDoCarro}")
+    public CarroDTO deletarCarro (@PathVariable String nomeDoCarro, @RequestBody CarroDTO carroDTO) {
+        for (CarroDTO objetoDaLista : concessionaria)
+            if (objetoDaLista.getModelo().equals(nomeDoCarro)) {
+                concessionaria.remove(nomeDoCarro);
+
+                return (CarroDTO) concessionaria;
+            }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrei");
+    }
+
 }
