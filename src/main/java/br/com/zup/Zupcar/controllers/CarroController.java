@@ -72,7 +72,6 @@ public class CarroController {
         for (CarroDTO objetoDaLista : concessionaria)
             if (objetoDaLista.getModelo().equals(nomeDoCarro)) {
                 concessionaria.remove(nomeDoCarro);
-
             }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrei");
     }

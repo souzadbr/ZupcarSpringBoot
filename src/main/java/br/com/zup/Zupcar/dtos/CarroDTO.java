@@ -32,7 +32,7 @@ public class CarroDTO {
         this.cor = cor;
     }
 
-    public String getMotor(String motor) {
+    public String getMotor() {
         return this.motor;
     }
 
@@ -40,11 +40,14 @@ public class CarroDTO {
         this.motor = motor;
     }
 
-    public int getAno(int ano) {
+    public int getAno() {
         return this.ano;
     }
 
     public void setAno(int ano) {
         this.ano = ano;
     }
+
 }
+
+
