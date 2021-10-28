@@ -32,16 +32,16 @@ public class CarroDTO {
         this.cor = cor;
     }
 
-    public String getMotor() {
-        return motor;
+    public String getMotor(String motor) {
+        return this.motor;
     }
 
     public void setMotor(String motor) {
         this.motor = motor;
     }
 
-    public int getAno() {
-        return ano;
+    public int getAno(int ano) {
+        return this.ano;
     }
 
     public void setAno(int ano) {
