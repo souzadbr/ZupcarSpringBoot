@@ -14,27 +14,27 @@ public class CarroController {
     private List<CarroDTO> concessionaria = new ArrayList<>();
 
     @GetMapping // é o Request Mapping utilizando o Verbo GET do PROTOCOLO HTTP
-    public List<CarroDTO> exibirTodosOsCarros(){
+    public List<CarroDTO> exibirTodosOsCarros() {
         return concessionaria;
     }
 
     @PostMapping // é o Request Mapping utilizando o Verbo POST do PROTOCOLO HTTP
     @ResponseStatus(HttpStatus.CREATED)
-    public void cadastrarCarro(@RequestBody CarroDTO carroDTO){
+    public void cadastrarCarro(@RequestBody CarroDTO carroDTO) {
         // Todo Classe DTO são representações de Json seja de Entrada ou Saida.
         concessionaria.add(carroDTO);
     }
 
-    @GetMapping ("/{nomedoCarro}")
-    public CarroDTO exibirCarro (@PathVariable String nomedoCarro){
+    @GetMapping("/{nomedoCarro}")
+    public CarroDTO exibirCarro(@PathVariable String nomedoCarro) {
 
-        for (CarroDTO objeto: concessionaria
-             ) {
-            if(objeto.getModelo().equalsIgnoreCase(nomedoCarro)){
+        for (CarroDTO objeto : concessionaria
+        ) {
+            if (objeto.getModelo().equalsIgnoreCase(nomedoCarro)) {
                 return objeto;
             }
         }
-     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrado");
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrado");
     }
 
     //Método atualizar um carro com erro entregue no exercicio
@@ -52,9 +52,9 @@ public class CarroController {
     //Método correto que atualiza um carro
 
     @PutMapping("/{nomeDoCarro}")
-    public CarroDTO atualizarCarro(@PathVariable String nomeDoCarro, @RequestBody CarroDTO carroDTO ){
-        for(CarroDTO objetoDaLista : concessionaria){
-            if(objetoDaLista.getModelo().equals(nomeDoCarro)){
+    public CarroDTO atualizarCarro(@PathVariable String nomeDoCarro, @RequestBody CarroDTO carroDTO) {
+        for (CarroDTO objetoDaLista : concessionaria) {
+            if (objetoDaLista.getModelo().equals(nomeDoCarro)) {
                 objetoDaLista.setAno(carroDTO.getAno());
                 objetoDaLista.setCor(carroDTO.getCor());
                 objetoDaLista.setMotor(carroDTO.getMotor());
@@ -67,13 +67,19 @@ public class CarroController {
     }
 
     //Método que deleta um carro feito para o exercicio
-    @DeleteMapping ("/{nomeDoCarro}")
-    public void deletarCarro (@PathVariable String nomeDoCarro, @RequestBody CarroDTO carroDTO) {
-        for (CarroDTO objetoDaLista : concessionaria)
-            if (objetoDaLista.getModelo().equals(nomeDoCarro)) {
-                concessionaria.remove(nomeDoCarro);
-            }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrei");
-    }
+    @DeleteMapping(value = "/{nomeDoCarro}")
 
+    public void deletarCarro(@PathVariable String nomeDoCarro) {
+        int contador = 0;
+        for (CarroDTO objetoDaLista : concessionaria) {
+            if (objetoDaLista.getModelo().equals(nomeDoCarro)) {
+                concessionaria.remove(objetoDaLista);
+                contador++;
+            }
+            if(contador ==0) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrei");
+            }
+        }
+
+    }
 }
