@@ -68,12 +68,11 @@ public class CarroController {
 
     //Método que deleta um carro feito para o exercicio
     @DeleteMapping ("/{nomeDoCarro}")
-    public CarroDTO deletarCarro (@PathVariable String nomeDoCarro, @RequestBody CarroDTO carroDTO) {
+    public void deletarCarro (@PathVariable String nomeDoCarro, @RequestBody CarroDTO carroDTO) {
         for (CarroDTO objetoDaLista : concessionaria)
             if (objetoDaLista.getModelo().equals(nomeDoCarro)) {
                 concessionaria.remove(nomeDoCarro);
 
-                return (CarroDTO) concessionaria;
             }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrei");
     }
