@@ -37,8 +37,8 @@ public class CarroController {
      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrado");
     }
 
-    //Método atualizar um carro
-    @PutMapping ("/{nomeDoCarro}")
+    //Método atualizar um carro com erro entregue no exercicio
+   /* @PutMapping ("/{nomeDoCarro}")
     public CarroDTO alterarCarro  (@PathVariable String nomeDoCarro, String cor, String motor, int ano){
         CarroDTO carroDTO =  new CarroDTO();
         carroDTO.setModelo(nomeDoCarro);
@@ -47,8 +47,26 @@ public class CarroController {
         carroDTO.setMotor(motor);
 
         return carroDTO;
+    }*/
+
+    //Método correto que atualiza um carro
+
+    @PutMapping("/{nomeDoCarro}")
+    public CarroDTO atualizarCarro(@PathVariable String nomeDoCarro, @RequestBody CarroDTO carroDTO ){
+        for(CarroDTO objetoDaLista : concessionaria){
+            if(objetoDaLista.getModelo().equals(nomeDoCarro)){
+                objetoDaLista.setAno(carroDTO.getAno());
+                objetoDaLista.setCor(carroDTO.getCor());
+                objetoDaLista.setMotor(carroDTO.getMotor());
+
+                return objetoDaLista;
+            }
+        }
+
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrei");
     }
 
+    //Método que deleta um carro feito para o exercicio
     @DeleteMapping ("/{nomeDoCarro}")
     public CarroDTO deletarCarro (@PathVariable String nomeDoCarro, @RequestBody CarroDTO carroDTO) {
         for (CarroDTO objetoDaLista : concessionaria)
